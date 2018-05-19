@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>top page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	h1 { font-size:18pt; font-weight:bold; color:pink; }
+	body { font-size:13pt; color:gray; margin:5px 25px; }
+	tr { margin:5px; }
+	th { padding:5px; color:white; background:darkgray; }
+	td { padding:5px; color:black; background:#f0f0f0; }
+	</style>
+</head>
+<body>
+<div th:replace="/common.html::header"></div>
+
+ <form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="ログアウト" />
+  </form>
+  <form action="#" th:action="@{/regist}" method="GET">
+    <input type="submit" value="新規登録" />
+    </form>
+ 
+  <table>
+  <tr><th>名前</th><th>メール</th><th>編集</th><th>削除</th><th>パスワード編集</th></tr>
+	<tr th:each="obj : ${datalist}">
+		<td th:text="${obj.name}"></td>
+		<td th:text="${obj.email}"></td>
+		<td><a href="/edit" th:href="@{/edit/{id}(id=${obj.id})}">edit</a></td>
+		<td><a href="/delete" th:href="@{/delete/{id}(id=${obj.id})}">delete</a></td>
+		<td><a href="/editPassword" th:href="@{/editPassword/{id}(id=${obj.id})}">editPassword</a></td>
+  </table>
+  
+  <table>
+   <form th:object="${datalist}" th:action="@{/}" method="GET">
+   <td><input type="submit" value="検索" /></td>
+   <td><input type="hidden" value="page" th:value="${page}"/></td>
+   <td><input type="hidden" value="size" th:value="${size}" /></td>
+   <td><input type="text" name="name" /></td>
+   </form>
+  </table>
+  
+  <div>
+  <p th:if="${datalist.getNumber() != 0}">
+  	<a my:mypage="${datalist.getNumber() - 1}">&lt;&lt;prev</a>
+  </p>
+ 	|
+ 	<a my:mypage="${datalist.getNumber() + 1}">next&gt;&gt;</a>
+ </div>	
+ <div th:replace="/common.html::footer"></div>
+</body>
+</html>

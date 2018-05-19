@@ -1,0 +1,1 @@
+INSERT INTO User VALUES (2, 'takahashi', 'takahashi');

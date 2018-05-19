@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<head>
+<div th:replace="/common.html::header"></div>
+	<title>edit page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	h1 { font-size:18pt; font-weight:bold; color:gray; }
+	body { font-size:13pt; color:gray; margin:5px 25px; }
+	tr { margin:5px; }
+	th { padding:5px; color:white; background:darkgray; }
+	td { padding:5px; color:black; background:#f0f0f0; }
+	</style>
+</head>
+<body>
+	<h1 th:text="${title}">Edit page</h1>
+	<table>
+	<form method="post" th:action="@{/edit}" th:object="${formModel}">
+	<ul>
+	 	<li th:each="error : ${#fields.detailedErrors()}" class="err" th:text="${error.message}" /> 
+	</ul>
+		<input type ="hidden" name="id" th:value="*{id}" />
+		<tr><td><label for="name">名前</label></td>
+		<td><input type ="text" name="name" th:value="*{name}" /></td></tr>
+		<tr><td><label for="name">メール</label></td>
+		<td><input type ="text" name="email" th:value="*{email}" /></td></tr>
+		<input type ="hidden" name="password" th:value="*{password}" />
+		<p><input type="submit" value="編集" /></td></tr></p>
+	</form>
+	</table>
+	<div th:replace="/common.html::footer"></div>
+</body>
+</html>

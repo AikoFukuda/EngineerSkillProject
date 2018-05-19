@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}" />
+        <style>
+        </style>
+        <title>エラーページ</title>
+    </head>
+    <body>
+        <div>
+            <a href="./top.html" th:href="@{/?size=20&page=0&name=}" class="linkButton">ホーム</a>
+        </div>
+        <div th:if="${status} == 400">不正なアクセスはしないでください。</div>
+        <div th:if="${status} == 404">
+            <div>ページが見つかりませんでした。</div>
+            <div>不正なアクセスはしないでください。</div>
+        </div>
+        <div th:if="${status} == 500">エラーが発生しました。</div>
+        <div th:text="'HTTPステータスコード' + ${status} + 'エラー'">HTTPステータスコード500エラー</div>
+        <div th:text="${error}"></div>
+  <script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+        <script>
+        </script>
+    </body>
+</html>
